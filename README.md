@@ -25,7 +25,7 @@ cd frontend/billing-app-ui
 npm start
 ```
 
-4. Once both the backend and frontend runs successfully [clickhere](http://localhost:3000) or visit [http://localhost:3000]
+4. Once both the backend and frontend runs successfully [clickhere](http://localhost:3000) or visit [http://localhost:3000](http://localhost:3000)
 
 ## Pages 
 1. Manage Billings page where you can see existing billings and their details also can create a new one using a button on top right of the table.
