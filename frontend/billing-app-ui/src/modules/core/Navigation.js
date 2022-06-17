@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,7 +19,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { styled } from '@mui/material/styles';
 import { useLocation } from "react-router";
 import Constants from '../../Constants.json'
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
+
+import { authenticationActions } from './store/authenticationSlice';
 
 const StyledListItemButton = styled(ListItemButton)(() => ({
     [`&.${listItemButtonClasses.selected}`]: {
@@ -63,7 +68,6 @@ const subNavItemsInitialData = [
     }
 ];
 
-
 const Navigation = () => {
     const location = useLocation();
     const pagePath = location.pathname
@@ -73,6 +77,21 @@ const Navigation = () => {
     const tooggleSideNavMenu = () => {
         setState(!state);
     };
+
+
+    const isAuth = useSelector(state => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
+    const loginHandler = (event) => {
+        event.preventDefault();
+
+        dispatch(authenticationActions.login());
+    };
+    const logoutHandler = (event) => {
+        event.preventDefault();
+
+        dispatch(authenticationActions.logout());
+    };
+
     React.useEffect(() => {
         if (pagePath !== null && pagePath !== "" && pagePath !== "/") {
             const selItem = pagePath.split("/");
@@ -121,7 +140,7 @@ const Navigation = () => {
                             display: 'flex',
                             alignItems: 'center'
                         }}>
-                            <IconButton
+                            {isAuth && <IconButton
                                 size="large"
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
@@ -130,7 +149,7 @@ const Navigation = () => {
                             // color="inherit"
                             >
                                 <MenuIcon />
-                            </IconButton>
+                            </IconButton>}
                             <Typography
                                 variant="h6"
                                 noWrap
@@ -140,6 +159,23 @@ const Navigation = () => {
                                 LOGO
                             </Typography>
                         </div>
+                        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                            {!isAuth &&
+                                <Button
+                                    onClick={loginHandler}
+                                    sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+                                >
+                                    Login
+                                </Button>}
+                            {isAuth &&
+                                <Button
+                                    onClick={logoutHandler}
+                                    sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+                                >
+                                    Logout
+                                </Button>
+                            }
+                        </Box>
                     </Toolbar>
                 </Container>
                 <Drawer
