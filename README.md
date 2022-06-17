@@ -22,6 +22,7 @@ Or use your preferred IDE to run the java application
 #### Pre requisites (Node 16+)
 ```bash
 cd frontend/billing-app-ui
+npm install
 npm start
 ```
 
@@ -31,3 +32,7 @@ npm start
 1. Manage Billings page where you can see existing billings and their details also can create a new one using a button on top right of the table.
 2. Payment Screen here can pay the bill (just an alert displaying the amount and customer name) can be done only after Admin approves the Billing request (only approved bilings will be shown).
 3. Admin Manage billings page here can review the billing request and respond with the status (Approve/Pending(default)/Reject).
+
+## Technologies Used
+1. Technologies: React 18.2 (Frontend), Java(Spring Boot) (Backend)
+2. React Libraries: React-Redux(v8), ReactRouter(v6), Axios, React MUI(v5.8).
